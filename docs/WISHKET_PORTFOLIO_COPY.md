@@ -23,7 +23,7 @@
 
 ## 결과물 URL
 
-https://forblune.github.io/forblune-clientflow/
+https://clientflow.forblune.com/
 
 ## 프로젝트 상세
 

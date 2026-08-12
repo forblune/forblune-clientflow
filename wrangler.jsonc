@@ -1,0 +1,18 @@
+{
+  "$schema": "../forblune-opsflow-studio/node_modules/wrangler/config-schema.json",
+  "name": "forblune-clientflow",
+  "compatibility_date": "2026-08-12",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    {
+      "pattern": "clientflow.forblune.com",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
