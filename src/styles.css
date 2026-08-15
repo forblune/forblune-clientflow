@@ -182,3 +182,35 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms!important; transition-duration: .001ms!important; scroll-behavior: auto!important; } }
+
+/* Operations ledger pass: keep records and next actions ahead of decoration. */
+body { background: var(--bg); }
+.sidebar { background: var(--sidebar); backdrop-filter: none; }
+.brand-mark { border-radius: 2px; background: var(--mint); box-shadow: none; }
+.mode-card { padding-inline: 10px 0; border: 0; border-left: 2px solid var(--mint); border-radius: 0; background: transparent; }
+.live-dot, .priority-dot, .sidebar-foot svg { box-shadow: none; }
+.nav-item { border-radius: 2px; }
+.nav-item.is-active { background: transparent; box-shadow: inset 2px 0 var(--mint); }
+.nav-item em, .demo-badge, .safe-badge, .language, .primary-button { border-radius: 2px; }
+.demo-badge, .safe-badge { background: transparent; }
+.primary-button { background: var(--mint); box-shadow: none; }
+.metric-grid { gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.metric-card { min-height: 126px; border: 0; border-right: 1px solid var(--line); border-radius: 0; background: transparent; }
+.metric-card:last-child { border-right: 0; }
+.metric-card::after { display: none; }
+.panel, .kanban-column, .lead-card, .pipeline-kpis > div, .modal, .detail-grid > div, .next-action-card, .note-card { border-radius: 2px; box-shadow: none; }
+.lead-card:hover { transform: none; }
+.pipeline-kpis > div, .inbox-summary { background: var(--surface); }
+.activity-icon, .inbox-summary > span, .lead-company > i, .avatar, .lead-identity > span, .next-action-card > span, .modal > header > div > span { border-radius: 2px; background: var(--surface-3); box-shadow: none; }
+.stage, .priority, .top-badges span, .view-toggle, .view-toggle button, .search-box, .filter-group label, .icon-button, .form-grid input, .toast { border-radius: 2px; }
+.bar i, .source-chart i, .primary-button, .lead-identity > span { background-image: none; }
+.drawer { box-shadow: none; }
+
+@media (max-width: 820px) {
+  .mobile-nav, .mobile-nav button { border-radius: 2px; }
+  .metric-card:nth-child(2n) { border-right: 0; }
+}
+
+@media (max-width: 560px) {
+  .lead-row { border-radius: 2px; }
+}
