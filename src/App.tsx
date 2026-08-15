@@ -18,14 +18,14 @@ type IconName =
 
 const copy = {
   ko: {
-    product: 'ClientFlow', productSub: '고객 문의 운영 데모', demo: 'DEMO DATA', local: '외부 전송 없음',
+    product: 'ClientFlow', productSub: '고객 문의 운영 데모', demo: 'FICTIONAL SAMPLE', local: '브라우저 안에서만 동작',
     dashboard: '개요', leads: '고객 문의', pipeline: '파이프라인', inbox: '응답함',
-    dashboardTitle: '오늘의 고객 운영', dashboardSub: '놓치기 쉬운 문의와 다음 행동을 먼저 확인하세요.',
+    dashboardTitle: '가상 문의 8건으로 CRM 흐름을 검증합니다', dashboardSub: '실제 고객·계약·매출이 아닙니다. 검색, 단계 이동, 응답 우선순위 기능을 확인하세요.',
     leadsTitle: '고객 문의', leadsSub: '검색·필터·보드 전환으로 모든 리드를 한곳에서 관리합니다.',
     pipelineTitle: '수주 파이프라인', pipelineSub: '단계별 진행 상황과 예정 금액을 함께 봅니다.',
     inboxTitle: '응답이 필요한 대화', inboxSub: '최근 활동과 다음 답변 시점을 기준으로 정렬했습니다.',
-    addLead: '새 문의', activeLeads: '진행 중 문의', attention: '오늘 확인', proposals: '제안·협상',
-    weighted: '가중 파이프라인', won: '확정 금액', basedOnDemo: '화면의 가상 데이터 기준',
+    addLead: '새 문의', activeLeads: '샘플 진행 문의', attention: '샘플 확인 대상', proposals: '샘플 제안·협상',
+    weighted: '샘플 가중 금액', won: '샘플 확정 금액', basedOnDemo: '가상 레코드 자동 계산',
     focusTitle: '먼저 확인할 문의', focusSub: '기한과 우선순위 기준', pipelineHealth: '단계별 현황',
     recentActivity: '최근 활동', sourceMix: '유입 경로', viewAll: '전체 보기',
     search: '회사·담당자·ID 검색', allStages: '전체 단계', allOwners: '전체 담당자',
@@ -39,17 +39,17 @@ const copy = {
     cancel: '취소', add: '추가', required: '회사명과 담당자를 입력해 주세요.',
     saved: '데모 문의가 추가되었습니다.', emptyInbox: '현재 응답 대기 문의가 없습니다.',
     needsReply: '응답 필요', scheduled: '예약됨', replyBy: '다음 행동', derived: '레코드에서 자동 계산',
-    disclaimer: '모든 이름·연락처·금액은 기능 검증을 위한 가상 데이터입니다.',
+    disclaimer: '실제 고객·계약·매출이 아닙니다. 이름·연락처·금액은 기능 검증용 가상 값입니다.',
   },
   en: {
-    product: 'ClientFlow', productSub: 'Client operations demo', demo: 'DEMO DATA', local: 'No external transfer',
+    product: 'ClientFlow', productSub: 'Client operations demo', demo: 'FICTIONAL SAMPLE', local: 'Runs in this browser',
     dashboard: 'Overview', leads: 'Leads', pipeline: 'Pipeline', inbox: 'Response desk',
-    dashboardTitle: "Today's client operations", dashboardSub: 'Start with inquiries and next actions that are easiest to miss.',
+    dashboardTitle: 'Test the CRM flow with eight fictional inquiries', dashboardSub: 'These are not real clients, contracts, or revenue. Review search, stage movement, and response prioritization.',
     leadsTitle: 'Client inquiries', leadsSub: 'Search, filter, and switch views without losing context.',
     pipelineTitle: 'Opportunity pipeline', pipelineSub: 'Review stage progress and expected value together.',
     inboxTitle: 'Conversations needing a response', inboxSub: 'Ordered by recent activity and next-response timing.',
-    addLead: 'New inquiry', activeLeads: 'Active leads', attention: 'Needs attention', proposals: 'Proposal · negotiation',
-    weighted: 'Weighted pipeline', won: 'Confirmed value', basedOnDemo: 'Based on visible demo records',
+    addLead: 'New inquiry', activeLeads: 'Sample active inquiries', attention: 'Sample review queue', proposals: 'Sample proposal · negotiation',
+    weighted: 'Sample weighted value', won: 'Sample confirmed value', basedOnDemo: 'Calculated from fictional records',
     focusTitle: 'Review first', focusSub: 'By due date and priority', pipelineHealth: 'Pipeline stages',
     recentActivity: 'Recent activity', sourceMix: 'Lead sources', viewAll: 'View all',
     search: 'Search company, contact, or ID', allStages: 'All stages', allOwners: 'All owners',
@@ -63,7 +63,7 @@ const copy = {
     cancel: 'Cancel', add: 'Add inquiry', required: 'Enter a company and contact name.',
     saved: 'Demo inquiry added.', emptyInbox: 'No inquiries are waiting for a response.',
     needsReply: 'Needs reply', scheduled: 'Scheduled', replyBy: 'Next action', derived: 'Calculated from records',
-    disclaimer: 'All names, contact details, and amounts are fictional demo data.',
+    disclaimer: 'These are not real clients, contracts, or revenue. Names, contact details, and amounts are fictional test values.',
   },
 } as const;
 
@@ -326,9 +326,9 @@ function NewLeadModal({ lang, onClose, onAdd }: { lang: Lang; onClose(): void; o
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); const data = new FormData(event.currentTarget); const company = String(data.get('company') ?? '').trim(); const contact = String(data.get('contact') ?? '').trim();
     if (!company || !contact) { setError(t.required); return; }
-    onAdd({ id: `LD-${1050 + Math.floor(Math.random() * 49)}`, company, contact, email: String(data.get('email') ?? 'demo@example.com') || 'demo@example.com', stage: 'new', priority: 'medium', value: Number(data.get('value')) || 1_500_000, owner: 'Geonhee', source: 'Manual demo', dueOffset: 2, lastActivityKo: '데모 문의 직접 추가', lastActivityEn: 'Demo inquiry added manually', nextActionKo: '요구사항 확인 답변', nextActionEn: 'Reply to confirm requirements', noteKo: '이 브라우저 세션에만 존재하는 데모 문의입니다.', noteEn: 'This demo inquiry exists only in the current browser session.' });
+    onAdd({ id: `LD-${1050 + Math.floor(Math.random() * 49)}`, company, contact, email: String(data.get('email') ?? 'demo@example.test') || 'demo@example.test', stage: 'new', priority: 'medium', value: Number(data.get('value')) || 1_500_000, owner: 'OWNER-A', source: 'Manual demo', dueOffset: 2, lastActivityKo: '데모 문의 직접 추가', lastActivityEn: 'Demo inquiry added manually', nextActionKo: '요구사항 확인 답변', nextActionEn: 'Reply to confirm requirements', noteKo: '이 브라우저 세션에만 존재하는 데모 문의입니다.', noteEn: 'This demo inquiry exists only in the current browser session.' });
   };
-  return <div className="modal-layer"><button className="scrim" aria-label={t.close} onClick={onClose}/><form className="modal" onSubmit={submit}><header><div><span><Icon name="plus"/></span><div><h2>{t.newLeadTitle}</h2><p>{t.newLeadSub}</p></div></div><button type="button" className="icon-button" onClick={onClose} aria-label={t.close}><Icon name="close"/></button></header><div className="form-grid"><label><span>{t.companyName} *</span><input name="company" autoFocus placeholder={lang === 'ko' ? '예: 오로라 스튜디오' : 'e.g. Aurora Studio'}/></label><label><span>{t.contactName} *</span><input name="contact" placeholder={lang === 'ko' ? '예: 김하늘' : 'e.g. Hana Kim'}/></label><label><span>{t.email}</span><input name="email" type="email" placeholder="demo@example.com"/></label><label><span>{t.expectedValue}</span><input name="value" type="number" min="0" step="100000" placeholder="1500000"/></label></div>{error && <p className="form-error">{error}</p>}<footer><button type="button" onClick={onClose}>{t.cancel}</button><button className="primary-button" type="submit"><Icon name="plus" size={16}/>{t.add}</button></footer></form></div>;
+  return <div className="modal-layer"><button className="scrim" aria-label={t.close} onClick={onClose}/><form className="modal" onSubmit={submit}><header><div><span><Icon name="plus"/></span><div><h2>{t.newLeadTitle}</h2><p>{t.newLeadSub}</p></div></div><button type="button" className="icon-button" onClick={onClose} aria-label={t.close}><Icon name="close"/></button></header><div className="form-grid"><label><span>{t.companyName} *</span><input name="company" autoFocus placeholder="SAMPLE-CLIENT-09"/></label><label><span>{t.contactName} *</span><input name="contact" placeholder="DEMO-CONTACT-09"/></label><label><span>{t.email}</span><input name="email" type="email" placeholder="demo09@example.test"/></label><label><span>{t.expectedValue}</span><input name="value" type="number" min="0" step="100000" placeholder="1500000"/></label></div>{error && <p className="form-error">{error}</p>}<footer><button type="button" onClick={onClose}>{t.cancel}</button><button className="primary-button" type="submit"><Icon name="plus" size={16}/>{t.add}</button></footer></form></div>;
 }
 
 export default App;
