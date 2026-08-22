@@ -4,3 +4,4 @@ dist
 *.local
 docs/assets/*-source.png
 docs/qa/initial/
+.wrangler/
