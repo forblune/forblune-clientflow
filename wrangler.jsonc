@@ -1,6 +1,7 @@
 {
   "$schema": "../forblune-opsflow-studio/node_modules/wrangler/config-schema.json",
   "name": "forblune-clientflow",
+  "account_id": "8e7db1ee168c06561f422235363c977c",
   "compatibility_date": "2026-08-12",
   "assets": {
     "directory": "./dist",

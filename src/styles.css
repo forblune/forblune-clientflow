@@ -26,7 +26,7 @@
 
 * { box-sizing: border-box; }
 html { min-width: 320px; background: var(--bg); }
-body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--bg); }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--bg); word-break: keep-all; overflow-wrap: break-word; }
 button, input, select { font: inherit; }
 button { color: inherit; }
 button, select { cursor: pointer; }
